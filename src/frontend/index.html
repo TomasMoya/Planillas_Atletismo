@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atletismo — Gestor de Planillas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-track">
+                    <span class="lane"></span>
+                    <span class="lane"></span>
+                    <span class="lane"></span>
+                </span>
+                <span class="logo-text">ATLETISMO</span>
+            </div>
+            <p class="header-sub">Gestor de Planillas de Competición</p>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <section class="intro">
+            <h1 class="title">De inscripción <br><span class="accent">a competición.</span></h1>
+            <p class="subtitle">Subí las planillas de inscripción de cada institución y el sistema generará automáticamente las planillas de competición organizadas por disciplina, categoría y sexo.</p>
+        </section>
+
+        <section class="upload-section">
+
+            <div class="steps">
+                <div class="step">
+                    <span class="step-label">01</span>
+                    <span class="step-text">Seleccioná los archivos Excel de cada institución</span>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step">
+                    <span class="step-label">02</span>
+                    <span class="step-text">Procesá las planillas</span>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step">
+                    <span class="step-label">03</span>
+                    <span class="step-text">Descargá el archivo listo para la competición</span>
+                </div>
+            </div>
+
+            <div class="dropzone" id="dropzone">
+                <input type="file" id="fileInput" multiple accept=".xlsx" hidden>
+                <div class="dropzone-idle" id="dropzoneIdle">
+                    <div class="drop-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="8" y="12" width="32" height="28" rx="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M16 12V10C16 8.9 16.9 8 18 8H30C31.1 8 32 8.9 32 10V12" stroke="currentColor" stroke-width="2"/>
+                            <path d="M24 20V32M24 20L19 25M24 20L29 25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p class="drop-main">Arrastrá los archivos acá</p>
+                    <p class="drop-sub">o</p>
+                    <button class="btn-select" onclick="document.getElementById('fileInput').click()">
+                        Seleccionar archivos
+                    </button>
+                    <p class="drop-hint">Solo archivos .xlsx</p>
+                </div>
+            </div>
+
+            <div class="file-list" id="fileList" style="display:none">
+                <div class="file-list-header">
+                    <span class="file-list-title">Archivos seleccionados</span>
+                    <button class="btn-clear" id="btnClear">Limpiar</button>
+                </div>
+                <ul class="files" id="filesUl"></ul>
+            </div>
+
+            <div class="action-area" id="actionArea" style="display:none">
+                <button class="btn-process" id="btnProcess">
+                    <span class="btn-process-text">Procesar planillas</span>
+                </button>
+            </div>
+
+            <div class="loader" id="loader" style="display:none">
+                <div class="track-loader">
+                    <div class="runner"></div>
+                </div>
+                <p class="loader-text">Procesando planillas...</p>
+            </div>
+
+            <div class="result" id="result" style="display:none">
+                <div class="result-icon">✓</div>
+                <p class="result-title">¡Planillas listas!</p>
+                <p class="result-sub">El archivo está organizado por disciplina, categoría y sexo.</p>
+                <a class="btn-download" id="btnDownload" download="Planillas_Competicion.xlsx">
+                    Descargar planillas
+                </a>
+                <button class="btn-restart" id="btnRestart">Procesar otras planillas</button>
+            </div>
+
+            <div class="error-box" id="errorBox" style="display:none">
+                <p class="error-title">Ocurrió un error</p>
+                <p class="error-msg" id="errorMsg"></p>
+                <button class="btn-restart" id="btnRetry">Reintentar</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Asociación Atlética del Valle</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
